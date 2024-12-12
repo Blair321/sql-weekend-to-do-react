@@ -4,11 +4,11 @@ const pool = require('../modules/pool.js');
 
 // GET
 router.get( '/', ( req, res )=>{
-    console.log( '/todos GET' );
+    console.log( '/api/todos GET' );
     // assemble query
-    const queryText = 'SELECT * FROM todos';
+    const queryString = 'SELECT * FROM todos';
     // run pool.query
-    pool.query( queryText ).then( ( results )=>{
+    pool.query( queryString ).then( ( results )=>{
         // return results.rows
         console.log(results.rows);
         res.send( results.rows );

@@ -1,18 +1,28 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import axios from 'axios';
 
-const App = () => {
+function App () {
   //anything I have in a use state goes at the top 
-
+const [todosList, setTodosList] = useState([])
 //anything that is a useEffect 
+useEffect(()=>{
+  fetchTodosList()
+}, [])
 
-//custome js handle functions (onClicks, onSubmit, etc)
-
-
-  // your return is just your "html" you can use javascript in here by wrapping things in {}
-  // this is most common for conditions ex {foo === "bar" &&  <div></div>}
+function fetchTodosList() {
+  console.log('in FetchTodosList');
+  axios.get('/api/todos').then(function(response)
+  {setTodosList(response.data);
+  }).catch(function(err){
+    console.log(err);
+    alert('error in getting todos list')
+  })
+  
+}
   return (
     <div>
       <h1>TO DO APP</h1>
+      <p> {JSON.stringify(todosList)}</p>
     </div>
   );
 
