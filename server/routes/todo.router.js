@@ -39,13 +39,13 @@ router.post('/', (req, res) => {
         })
 });
 // PUT
-router.delete( '/:id', ( req, res )=>{
-    console.log( 'in /todos DELETE:', req.params.id );
+router.delete( '/', ( req, res )=>{
+    console.log( ' /api/todos DELETE:', req.body, req.query );
         // assemble query
-        const queryText = `DELETE FROM todos WHERE id=$1;`;
-        const values = [ req.params.id ];
+        const queryString = `DELETE FROM todos WHERE id=$1;`;
+        const values = [ req.query.id ];
         // run pool.query
-        pool.query( queryText, values ).then( ( results )=>{
+        pool.query( queryString, values ).then( ( results )=>{
             console.log("READY and ID", values)
             res.sendStatus( 200 ); // "OK"
         }).catch( ( err )=>{

@@ -9,6 +9,16 @@ useEffect(()=>{
   fetchTodosList()
 }, [])
 
+function deleteTask(id) {
+  console.log('in delete Task:', id);
+  axios.delete(`/api/todos?id=${id}`).then (function(response)
+  {console.log('back into delete;', response.data)
+    fetchTodosList();
+  }).catch (function(err){console.log(err);
+    alert('error in deleting task')
+
+  })
+}
 function fetchTodosList() {
   console.log('in FetchTodosList');
   axios.get('/api/todos').then(function(response)
@@ -35,10 +45,16 @@ function toggleComplete(id) {
   return (
     <div>
       <h1>TO DO APP</h1>
+      <h2>Add New task:</h2>
+      <input type="text" placeholder='New Task' onChange= {(e)=>{createNewTask(e.target.value)}}/>
+      <button>Add Task</button>
       {
       todosList.map((item)=>(
 
-        <p key={item.id}>{item.text}<button onClick={()=>{toggleComplete(item.id)}}>Is Complete?</button></p>
+        <p key={item.id}>{item.name}
+        <button onClick={()=>{toggleComplete(item.id)}}>Is Complete?</button>
+        <button onClick={()=>{deleteTask(item.id)}}>Delete?</button>
+        </p>
       ))}
     </div>
   );
