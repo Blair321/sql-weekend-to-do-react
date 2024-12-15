@@ -22,10 +22,10 @@ router.get( '/', ( req, res )=>{
 router.post('/', (req, res) => {
     console.log('/api/todos POST:', req.body, req.query);
     const queryString = `INSERT INTO "todos" ( "name" , "complete")
-VALUES ( '$1', false);
+VALUES ( $1, false);
 `
 const values = [req.body.name];
-pool.query(queryString.values). then ((results)=>{
+pool.query(queryString, values). then ((results)=>{
 res.sendStatus(201)
 }).catch((err)=>{
     console.log(err);

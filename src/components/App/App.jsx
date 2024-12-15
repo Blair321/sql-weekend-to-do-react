@@ -1,7 +1,6 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import './App.css';
-import { response } from 'express';
 function App () {
   //anything I have in a use state goes at the top 
 const [todosList, setTodosList] = useState([])
@@ -13,17 +12,17 @@ useEffect(()=>{
 
 function addNewtask() {
   const objectToSend = {
-    Task : newTask
-  }
+   name : newTask
+   }
   console.log('send:', objectToSend);
   axios.post('/api/todos', objectToSend).then (function(repsonse)
   {console.log('back to post:',repsonse.data);
     fetchTodosList();
   }).catch(function(err)
-  {console.log(err);
-    alert('error to add task');
+   {console.log(err);
+   alert('error to add task');
 
-  })
+   })
 
   }
 
