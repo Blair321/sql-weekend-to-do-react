@@ -19,10 +19,19 @@ function fetchTodosList() {
   })
   
 }
+function toggleComplete(id) {
+  console.log('in toggle Comlete', id);
+  
+}
   return (
     <div>
       <h1>TO DO APP</h1>
       <p> {JSON.stringify(todosList)}</p>
+      {
+      todosList.map((item)=>(
+
+        <p key={item.id}>{item.text}<button onClick={()=>{toggleComplete(item.id)}}>Is Complete?</button></p>
+      ))}
     </div>
   );
 
