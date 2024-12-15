@@ -55,14 +55,11 @@ router.delete( '/:id', ( req, res )=>{
         })
 })
 // DELETE
-router.put( '/:id', ( req, res )=>{
-    const queryText = `UPDATE todos SET "isComplete"=$1 WHERE id=$2;`;
-    const r = req.body.isComplete ;
-     
-    const values = [  r , req.params.id  ];
-    console.log(values);
+router.put( '/', ( req, res )=>{
+    const queryString = `UPDATE "todos" set complete =NOT complete WHERE "id"=$1`;
+    const values = [ req.body.id  ];
     // run pool.query
-    pool.query( queryText, values ).then( ( results )=>{
+    pool.query( queryString, values ).then( ( results )=>{
         res.sendStatus( 200 ); // "OK"
     }).catch( ( err )=>{
         // handle any errors

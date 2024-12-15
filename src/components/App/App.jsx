@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-
+import './App.css';
 function App () {
   //anything I have in a use state goes at the top 
 const [todosList, setTodosList] = useState([])
@@ -20,13 +20,21 @@ function fetchTodosList() {
   
 }
 function toggleComplete(id) {
-  console.log('in toggle Comlete', id);
-  
+  console.log('in toggle Complete', id);
+  const objectToSend = {
+    id:id}
+  axios.put('/api/todos', objectToSend).then(function(response)
+  {console.log('back from Put:', response.data);
+    fetchTodosList();
+  }).catch(function(err){
+    console.log(err);
+    alert('error in updating')
+   
+  })
 }
   return (
     <div>
       <h1>TO DO APP</h1>
-      <p> {JSON.stringify(todosList)}</p>
       {
       todosList.map((item)=>(
 
