@@ -1,13 +1,32 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import './App.css';
+import { response } from 'express';
 function App () {
   //anything I have in a use state goes at the top 
 const [todosList, setTodosList] = useState([])
+const [newTask, setNewTask] = useState('')
 //anything that is a useEffect 
 useEffect(()=>{
   fetchTodosList()
 }, [])
+
+function addNewtask() {
+  const objectToSend = {
+    Task : newTask
+  }
+  console.log('send:', objectToSend);
+  axios.post('/api/todos', objectToSend).then (function(repsonse)
+  {console.log('back to post:',repsonse.data);
+    fetchTodosList();
+  }).catch(function(err)
+  {console.log(err);
+    alert('error to add task');
+
+  })
+
+  }
+
 
 function deleteTask(id) {
   console.log('in delete Task:', id);
@@ -46,8 +65,8 @@ function toggleComplete(id) {
     <div>
       <h1>TO DO APP</h1>
       <h2>Add New task:</h2>
-      <input type="text" placeholder='New Task' onChange= {(e)=>{createNewTask(e.target.value)}}/>
-      <button>Add Task</button>
+      <input type="text" placeholder='New Task' onChange= {(e)=>{setNewTask(e.target.value)}}/>
+      <button onClick={addNewtask} >Add Task</button>
       {
       todosList.map((item)=>(
 

@@ -20,24 +20,19 @@ router.get( '/', ( req, res )=>{
 })
 // POST
 router.post('/', (req, res) => {
-    console.log('req.body', req.body);
-    const newToDo = req.body
+    console.log('/api/todos POST:', req.body, req.query);
+    const queryString = `INSERT INTO "todos" ( "name" , "complete")
+VALUES ( '$1', false);
+`
+const values = [req.body.name];
+pool.query(queryString.values). then ((results)=>{
+res.sendStatus(201)
+}).catch((err)=>{
+    console.log(err);
+    res.sendStatus(400)
+})
 
-    const queryText = `
-        INSERT INTO "todos"("text", "isComplete") 
-        VALUES ($1, $2);
-    `
-    const values = [newToDo.text, newToDo.isComplete]
-
-    pool.query(queryText, values)
-        .then((result) => {
-            res.sendStatus(201)
-        })
-        .catch((error) => {
-            console.log(`Error making query: ${queryText} -`, error)
-            res.sendStatus(500)
-        })
-});
+}) 
 // PUT
 router.delete( '/', ( req, res )=>{
     console.log( ' /api/todos DELETE:', req.body, req.query );
