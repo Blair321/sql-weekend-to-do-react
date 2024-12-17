@@ -62,7 +62,7 @@ function toggleComplete(id) {
 }
   return (
     <div>
-      <h1>TO DO APP</h1>
+      <h1>Blair's To DO APP </h1>
       <h2>Add New task:</h2>
       <input type="text" placeholder='New Task' onChange= {(e)=>{setNewTask(e.target.value)}}/>
       <button onClick={addNewtask} >Add Task</button>
