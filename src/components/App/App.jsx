@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-import './App.css';
 function App () {
   //anything I have in a use state goes at the top 
 const [todosList, setTodosList] = useState([])
@@ -66,14 +65,26 @@ function toggleComplete(id) {
       <h2>Add New task:</h2>
       <input type="text" placeholder='New Task' onChange= {(e)=>{setNewTask(e.target.value)}}/>
       <button onClick={addNewtask} >Add Task</button>
+
+      <table>
+        <thead>
+          <tr>
+            <th>To Do Item</th>
+            <th>Completed?</th>
+            <th>Delete?</th>
+          </tr>
+        </thead>
+        <tbody>
       {
       todosList.map((item)=>(
-
-        <p key={item.id}>{item.name}
-        <button onClick={()=>{toggleComplete(item.id)}}>Is Complete?</button>
-        <button onClick={()=>{deleteTask(item.id)}}>Delete?</button>
-        </p>
+        <tr key={item.id}>{item.name}
+       <td><button onClick={()=>{toggleComplete(item.id)}}>Complete?</button></td>
+       <td><button onClick={()=>{deleteTask(item.id)}}>Delete?</button> </td>
+        </tr>
+        
       ))}
+       </tbody>
+       </table>
     </div>
   );
 
