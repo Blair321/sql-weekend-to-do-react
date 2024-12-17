@@ -1,5 +1,5 @@
 
- body {
+ /* body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
@@ -33,4 +33,9 @@ tbody tr:nth-child(even){
 }
 header {text-align: center;}
 
-footer {text-align: center;}
+footer {text-align: center;} */
+
+.completed {
+background-color: darkgreen;
+color: white;
+}

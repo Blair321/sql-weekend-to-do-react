@@ -77,8 +77,9 @@ function toggleComplete(id) {
         <tbody>
       {
       todosList.map((item)=>(
-        <tr key={item.id}>{item.name}
-       <td><button onClick={()=>{toggleComplete(item.id)}}>Complete?</button></td>
+        <tr key={item.id}>
+          {item.name}
+       <td><button className={`${item.complete && 'completed'}`}onClick={()=>{toggleComplete(item.id)}}>Complete?</button></td>
        <td><button onClick={()=>{deleteTask(item.id)}}>Delete?</button> </td>
         </tr>
         
